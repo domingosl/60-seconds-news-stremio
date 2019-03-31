@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>News app</title>
+
+    <link rel="stylesheet" type="text/css" href="/lib/ionic-v1.3.3/css/ionic.min.css">
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+
+    <script src="/lib/ionic-v1.3.3/js/ionic.bundle.js"></script>
+    <script src="/lib/qrcode.js"></script>
+    <script src="/lib/qrcode-utf8.js"></script>
+    <script src="/lib/angular-qrcode.js"></script>
+
+</head>
+<body ng-controller="main">
+<ion-content>
+
+    <div class="container">
+        <div class="content-wrapper">
+
+            <div style="display:table;height: 100%;">
+                <div style="display:table-cell;vertical-align:middle;">
+                    <div style="margin-left:auto;margin-right:auto;width:100%;padding: 25px">
+                        <h1>{{articles[currentArticleIndex].title}}</h1>
+                        <p>{{articles[currentArticleIndex].description}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="qr">
+                <qrcode data="{{articles[currentArticleIndex].url}}" size="100" color="#fff" background="#000"></qrcode>
+            </div>
+
+            <div class="poweredby">
+                Powered by NewsAPI.org
+            </div>
+
+        </div>
+        <div class="black-overlay"></div>
+        <div class="background-image" ng-style="{ 'background-image': 'url(' + articles[currentArticleIndex].urlToImage + ')'}"></div>
+    </div>
+
+
+</ion-content>
+
+<script src="/app.js"></script>
+<script src="/lib/angular-images-preload.js"></script>
+</body>
+</html>
