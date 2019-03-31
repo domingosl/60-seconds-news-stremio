@@ -13,13 +13,7 @@ it on a TV. Then, it takes screenshots at a predefined frame rate of the rendere
 video using the images (FFMPEG) and it adds audio background for cinematic reasons. When the videos are ready, it uses
 them as source for a stream server and it populates a memory based database that serves as a catalog for Stremio.io.
 
-### Video demostration + fast code overview
-
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=YOUTUBE_VIDEO_ID_HERE" target="_blank">
-    <img src="http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" alt="IMAGE ALT TEXT HERE" width="520" height="280" border="10"/>
-</a>
-
-### How to use it
+### How to use it locally (remote test server soon)
 
 - Clone the repo
 - `npm install`
@@ -28,3 +22,9 @@ them as source for a stream server and it populates a memory based database that
 - Wait for all 3 videos to render
 - Install the addon on Stremio by using `http://127.0.0.1:43000/manifest.json`
 - Enjoy your new TV feeds
+
+### Video demostration + fast code overview
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=tPwa-Rtl44o" target="_blank">
+    <img src="http://img.youtube.com/vi/tPwa-Rtl44o/0.jpg" alt="Video screen" width="520" height="280" border="10"/>
+</a>
