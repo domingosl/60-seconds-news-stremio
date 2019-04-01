@@ -17,8 +17,8 @@ them as source for a stream server and it populates a memory based database that
 
 1. Clone the repo
 2. `npm install`
-3. Open .env and change FFMPEG_LOCATION for the location of your FFMPEG binary. (https://ffmpeg.org/)
-   * If you have FFMPEG installed globally (sudo apt install ffmpeg   on linux), use `FFMPEG_LOCATION=ffmpeg`
+3. Open .env and change FFMPEG_LOCATION with the location of your FFMPEG binary. (https://ffmpeg.org/)
+   * If you have FFMPEG installed globally (`sudo apt install ffmpeg`   on linux), use `FFMPEG_LOCATION=ffmpeg`
    * If you have an static binary, copy the location of it, for example if it is located in the project root: `FFMPEG_LOCATION=./ffmpeg`
 4. Run `node index.js`
 5. Wait for all 3 videos to render, depending on your system and the framerate selected, this step could take anything from a few
