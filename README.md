@@ -1,5 +1,8 @@
 # 60 seconds news addon for Stremio
 
+
+<img src="https://i.giphy.com/media/SGGHF3IeEhdDsZgY4e/source.gif" />
+
 ### What it is
 An addon for Stremio.io that provides streams of live breaking news from all around the world condensed in 60 seconds
 by country (At the moment US, Russia and Germany, more to come).
@@ -32,3 +35,10 @@ seconds to several minutes. Wait for the this log line to appear for each video:
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=tPwa-Rtl44o" target="_blank">
     <img src="http://img.youtube.com/vi/tPwa-Rtl44o/0.jpg" alt="Video screen" width="520" height="400" border="10"/>
 </a>
+
+
+### TODO
+
+- Add HTTPS support for production release (or maybe use Nginx as proxy)
+- Improve rendering speed by using async statements were possible.
+- Add API payload cache/sign to prevent video rendering when the content did not changed.
