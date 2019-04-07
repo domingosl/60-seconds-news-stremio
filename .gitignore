@@ -1,6 +1,7 @@
 node_modules
 logs
 ffmpeg
+ffmpeg.exe
 .DS_STORE
 .idea
 vid-output/*

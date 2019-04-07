@@ -22,13 +22,15 @@ class RenderPage {
                 rimraf.sync(dest);
             }
 
-            const [instance, page] = await _self.loadPage(url, frameRate);
-
-            const response = await _self.genVideo(page, instance, frameRate, videoLength, folderName);
-
-            logger.info('New video generated', {id: response, tagLabel: _self.tagLabel});
-
-            resolve(response);
+            try {
+                const [instance, page] = await _self.loadPage(url, frameRate);
+                const response = await _self.genVideo(page, instance, frameRate, videoLength, folderName);
+                logger.info('New video generated', {id: response, tagLabel: _self.tagLabel});
+                resolve(response);
+            }
+            catch (e) {
+                reject(e);
+            }
 
         });
     }
@@ -57,15 +59,20 @@ class RenderPage {
 
                     const bashCommand = process.env.FFMPEG_LOCATION + ' -i news-music.mp3 -framerate ' + frameRate + ' -i vid-output/' + folderName + '/frame%05d.png -pix_fmt yuv420p -shortest -y vid-output/' + folderName + '/output.mp4';
 
-                    logger.info(bashCommand, {tagLabel: _self.tagLabel});
+                    logger.info("Running FFMPEG...", {tagLabel: _self.tagLabel});
 
                     exec(bashCommand, (err, stdout, stderr) => {
                         if (err) {
                             logger.error("Error running ffmpeg", {error: err, tagLabel: _self.tagLabel});
-                            reject();
+                            reject(err);
                         }
 
-                        exec('rm vid-output/' + folderName + '/*.png', () => {
+                        logger.info("Cleaning the mess...", {tagLabel: _self.tagLabel});
+                        exec('rm vid-output/' + folderName + '/*.png', (err) => {
+
+                            if(err)
+                                logger.error("Was not able to clean the mess, maybe you are using Windows? :(");
+
                             resolve(folderName);
                         });
 
@@ -120,7 +127,7 @@ class RenderPage {
             await page.property('viewportSize', {width: 1024, height: 576});
 
             page.on('onConsoleMessage', function (msg) {
-                logger.info("Page console: " + msg, {tagLabel: _self.tagLabel});
+                logger.debug("Page console: " + msg, {tagLabel: _self.tagLabel});
             });
 
             page.on('onCallback', async function (data) {

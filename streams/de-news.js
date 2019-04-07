@@ -25,6 +25,10 @@ module.exports.render = () => {
 
         rendering = false;
 
+    }).catch(e => {
+
+        logger.error("Error while lunching FFMPEG", e);
+
     });
 
 };
