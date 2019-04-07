@@ -37,7 +37,7 @@ able to clean the screenshots since the clean commands are Linux commands.*
 ### Video demostration + fast code overview
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=tPwa-Rtl44o" target="_blank">
-    <img src="http://img.youtube.com/vi/tPwa-Rtl44o/0.jpg" alt="Video screen" width="520" height="400" border="10"/>
+    <img src="http://img.youtube.com/vi/tPwa-Rtl44o/0.jpg?r=123" alt="Video screen" width="520" height="400" border="10"/>
 </a>
 
 
