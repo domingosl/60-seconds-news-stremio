@@ -49,6 +49,7 @@ able to clean the screenshots since the clean commands are Linux commands.*
     <img src="http://img.youtube.com/vi/tPwa-Rtl44o/0.jpg?r=123" alt="Video screen" width="520" height="400" border="10"/>
 </a>
 
+**Due to recent big updates, some parts of the video related to the code walkthrough may not coincide with the recent state of the repo**
 
 ### TODO
 
