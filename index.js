@@ -20,7 +20,7 @@ app.use(require('morgan')("combined", { "stream": logger.stream }));
 
 app.get('/video/:videoID', videoStream);
 
-const addon = new addonBuilder(config);
+const addon = new addonBuilder(config.addon);
 
 addon.defineCatalogHandler(catalogController);
 addon.defineMetaHandler(metaController);
@@ -31,15 +31,11 @@ app.listen(process.env.HTTP_SERVER_PORT, async function () {
     logger.info("HTTP server running");
     logger.info("Generating streams video sources");
 
-    streams.ruNews.render();
-    streams.usNews.render();
-    streams.deNews.render();
+    streams.renderAll();
 
     cron.schedule('*/20 * * * *', () => {
         logger.info("Refreshing news feed");
-        streams.ruNews.render();
-        streams.usNews.render();
-        streams.deNews.render();
+        streams.renderAll();
     });
 
     serveHTTP(addon.getInterface(), { port: process.env.STREMIO_PORT });

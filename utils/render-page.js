@@ -8,7 +8,7 @@ const logger    = require('./logger');
 
 class RenderPage {
 
-    constructor(url, frameRate = 15, videoLength = 3000) {
+    constructor(url, frameRate = 1, videoLength = 60000, lastDataHash) {
 
         this.tagLabel = url;
         const _self = this;
@@ -23,10 +23,10 @@ class RenderPage {
             }
 
             try {
-                const [instance, page] = await _self.loadPage(url, frameRate);
-                const response = await _self.genVideo(page, instance, frameRate, videoLength, folderName);
-                logger.info('New video generated', {id: response, tagLabel: _self.tagLabel});
-                resolve(response);
+                const [instance, page, dataHash] = await _self.loadPage(url, frameRate, lastDataHash);
+                const videoId = await _self.genVideo(page, instance, frameRate, videoLength, folderName);
+                logger.info('New video generated', {id: videoId, tagLabel: _self.tagLabel});
+                resolve({videoId: videoId, dataHash: dataHash});
             }
             catch (e) {
                 reject(e);
@@ -116,7 +116,7 @@ class RenderPage {
 
     };
 
-    async loadPage(url, frameRate) {
+    async loadPage(url, frameRate, lastDataHash) {
 
         const _self = this;
 
@@ -130,12 +130,14 @@ class RenderPage {
                 logger.debug("Page console: " + msg, {tagLabel: _self.tagLabel});
             });
 
-            page.on('onCallback', async function (data) {
-                if (data === 'ok') {
-                    logger.info('Page ready for recording', {tagLabel: _self.tagLabel});
-                    await page.evaluateJavaScript("function() { window.timelines.setFramerate(" + frameRate + "); }");
-                    resolve([instance, page]);
-                }
+            page.on('onCallback', async function (dataHash) {
+                logger.info('Page ready for recording', {tagLabel: _self.tagLabel, hash: dataHash });
+
+                if(lastDataHash === dataHash)
+                    return reject('There is no need for video rendering, remote API data did not changed.');
+
+                await page.evaluateJavaScript("function() { window.timelines.setFramerate(" + frameRate + "); }");
+                resolve([instance, page, dataHash]);
             });
 
             const status = await page.open(url);

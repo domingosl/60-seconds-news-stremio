@@ -76,7 +76,7 @@ angular.module('app', ['ngAnimate', 'monospaced.qrcode'])
 
         function notifyPhantom() {
             if (typeof window.callPhantom === 'function')
-                window.callPhantom('ok');
+                window.callPhantom(sha1(JSON.stringify($scope.articles)));
             else {
                 $interval(timelines.animate, 1000/15);
             }

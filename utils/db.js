@@ -19,7 +19,7 @@ class Storage {
 
         this.data.forEach((_el, i)=> {
            if(_el.id === el.id) {
-               logger.debug("Element updated");
+               //logger.debug("Element updated");
                this.data[i] = el;
                updated = true;
            }
@@ -27,7 +27,7 @@ class Storage {
 
         if(!updated) {
             this.data.push(el);
-            logger.debug("Element inserted");
+            //logger.debug("Element inserted");
         }
     }
 
