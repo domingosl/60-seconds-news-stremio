@@ -3,6 +3,15 @@
 
 <img src="https://i.giphy.com/media/SGGHF3IeEhdDsZgY4e/source.gif" />
 
+### Updates
+
+##### Release 17/05/2019
+- Huge refactory made for the streams management. All is now handle in configuration rather than code, check config.js.
+
+- Caching was added to video rendering, now when the remote api data is the same, the video is not re rendered.
+
+- Added Japan, Cina, Argentina, Venezuela and Mexico.
+
 ### What it is
 An addon for Stremio.io that provides streams of live breaking news from all around the world condensed in 60 seconds
 by country (At the moment US, Russia and Germany, more to come).
@@ -43,8 +52,8 @@ able to clean the screenshots since the clean commands are Linux commands.*
 
 ### TODO
 
-[ ] Add HTTPS support for production release (or maybe use Nginx as proxy)
+- [ ] Add HTTPS support for production release (or maybe use Nginx as proxy)
 
-[ ] Improve rendering speed by using async statements were possible.
+- [ ] Improve rendering speed by using async statements were possible.
 
-[ ] Add API payload cache/sign to prevent video rendering when the content did not changed.
+- [x] Add API payload cache/sign to prevent video rendering when the content did not changed.
