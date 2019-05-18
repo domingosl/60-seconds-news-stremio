@@ -32,8 +32,8 @@ app.listen(process.env.HTTP_SERVER_PORT, async function () {
     logger.info("Generating streams video sources");
 
     streams.renderAll();
-
-    cron.schedule('*/20 * * * *', () => {
+    
+    cron.schedule('0 */3 * * *', () => {
         logger.info("Refreshing news feed");
         streams.renderAll();
     });

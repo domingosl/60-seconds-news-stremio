@@ -2,6 +2,7 @@ const streams = require('../config').streams;
 const logger = require('../utils/logger');
 const renderPage = require('../utils/render-page');
 const db = require('../utils/db');
+const events = require('../utils/events');
 
 class StreamCollection {
 
@@ -12,7 +13,8 @@ class StreamCollection {
         streams.forEach((stream, i) => {
             stream.status = {
                 rendering: false,
-                lastDataSha1: null
+                lastDataSha1: null,
+                renderingProgress: 0
             };
         })
 
@@ -31,6 +33,8 @@ class StreamCollection {
 
 const streamCollection = new StreamCollection(streams);
 
+//events.on('renderProgress', (data) => { console.log(data) });
+
 module.exports.renderAll = () => {
 
     streamCollection.find().forEach((stream, i) => {
@@ -44,8 +48,10 @@ module.exports.renderAll = () => {
             return logger.info("Cannot render " + stream.name + ", already rendering.");
 
         stream.status.rendering = true;
+        stream.status.renderingProgress = 0;
 
         new renderPage(
+            stream.countryCode,
             'http://127.0.0.1:' + process.env.HTTP_SERVER_PORT + '/news.html#?country=' + stream.countryCode,
             process.env.FRAMERATE,
             process.env.VIDEODURATION,

@@ -1,16 +1,18 @@
-const phantom   = require('phantom');
-const path      = require('path');
-const crypto    = require('crypto');
-const rimraf    = require('rimraf');
-const fs        = require('fs');
-const {exec}    = require('child_process');
-const logger    = require('./logger');
+const phantom       = require('phantom');
+const path          = require('path');
+const crypto        = require('crypto');
+const rimraf        = require('rimraf');
+const fs            = require('fs');
+const {exec}        = require('child_process');
+const logger        = require('./logger');
+const events        = require('./events');
 
 class RenderPage {
 
-    constructor(url, frameRate = 1, videoLength = 60000, lastDataHash) {
+    constructor(id, url, frameRate = 1, videoLength = 60000, lastDataHash) {
 
         this.tagLabel = url;
+        this.id = id;
         const _self = this;
 
         return new Promise(async (resolve, reject) => {
@@ -56,7 +58,8 @@ class RenderPage {
 
                 if (frameDone >= maxFrames - 1) {
                     logger.info('All frames stored', {tagLabel: _self.tagLabel});
-                    instance.exit();
+                    
+                    await instance.exit();
 
                     const bashCommand = process.env.FFMPEG_LOCATION + ' -i news-music.mp3 -framerate ' + frameRate + ' -i vid-output/' + folderName + '/frame%05d.png -pix_fmt yuv420p -shortest -y vid-output/' + folderName + '/output.mp4';
 
@@ -86,6 +89,7 @@ class RenderPage {
                 const progress = Math.round(100*frameDone/maxFrames);
                 if(progress >= nextNotificationAt) {
                     logger.info(progress + "%", { tagLabel: _self.tagLabel });
+                    //events.emit('renderProgress', { progress: progress, id: _self.id })
                     nextNotificationAt += nextNotificationAt;
                 }
 
