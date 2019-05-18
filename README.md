@@ -33,7 +33,7 @@ it on a TV. Then, it takes screenshots at a predefined frame rate of the rendere
 video using the images (FFMPEG) and it adds audio background for cinematic reasons. When the videos are ready, it uses
 them as source for a stream server and it populates a memory based database that serves as a catalog for Stremio.io.
 
-### How to use it locally (remote test server soon)
+### How to use it locally
 
 1. Clone the repo
 2. `npm install`
