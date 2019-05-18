@@ -73,10 +73,18 @@ module.exports = {
         },
         {
             countryCode: 'cn',
-            name: 'Cina news',
-            description: 'Live news from Cina',
-            background: 'https://i.imgur.com/Bn1HuTz.png',
-            poster: 'https://i.imgur.com/E8AuL9q.png',
+            name: 'China news',
+            description: 'Live news from China',
+            background: 'https://i.imgur.com/u9WiDUG.png',
+            poster: 'https://i.imgur.com/9loGphj.png',
+            active: true
+        },
+        {
+            countryCode: 'in',
+            name: 'India news',
+            description: 'Live news from India',
+            background: 'https://i.imgur.com/Rql4lx2.png',
+            poster: 'https://i.imgur.com/gtJriHf.png',
             active: true
         }
     ]

@@ -18,7 +18,7 @@
 
 - Caching was added to video rendering, now when the remote api data is the same, the video is not re rendered.
 
-- Added Japan, Cina, Argentina, Venezuela and Mexico.
+- Added Japan, China, Argentina, Venezuela and Mexico.
 
 ### What it is
 An addon for Stremio.io that provides streams of live breaking news from all around the world condensed in 60 seconds
