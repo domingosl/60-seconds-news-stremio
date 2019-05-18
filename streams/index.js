@@ -46,7 +46,7 @@ module.exports.renderAll = () => {
         stream.status.rendering = true;
 
         new renderPage(
-            process.env.SERVER_NAME + ':' + process.env.HTTP_SERVER_PORT + '/news.html#?country=' + stream.countryCode,
+            'http://127.0.0.1:' + process.env.HTTP_SERVER_PORT + '/news.html#?country=' + stream.countryCode,
             process.env.FRAMERATE,
             process.env.VIDEODURATION,
             stream.status.lastDataHash)
