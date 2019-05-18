@@ -17,13 +17,14 @@ class RenderPage {
 
             const folderName = crypto.createHash('sha1').update(url + frameRate + videoLength).digest('hex');
 
-            const dest = path.resolve('./vid-output', folderName);
-            if (fs.existsSync(dest)) {
-                rimraf.sync(dest);
-            }
-
             try {
                 const [instance, page, dataHash] = await _self.loadPage(url, frameRate, lastDataHash);
+
+                const dest = path.resolve('./vid-output', folderName);
+                if (fs.existsSync(dest)) {
+                    rimraf.sync(dest);
+                }
+
                 const videoId = await _self.genVideo(page, instance, frameRate, videoLength, folderName);
                 logger.info('New video generated', {id: videoId, tagLabel: _self.tagLabel});
                 resolve({videoId: videoId, dataHash: dataHash});
