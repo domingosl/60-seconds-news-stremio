@@ -3,7 +3,15 @@
 
 <img src="https://i.giphy.com/media/SGGHF3IeEhdDsZgY4e/source.gif" />
 
+
+### Production server
+**https://60secondsnews.xyz:43000/manifest.json**
+
 ### Updates
+
+##### Release 18/05/2019
+- Small fixes to support production release, mostly HTTPS support.
+
 
 ##### Release 17/05/2019
 - Huge refactory made for the streams management. All is now handle in configuration rather than code, check config.js.
@@ -53,7 +61,7 @@ able to clean the screenshots since the clean commands are Linux commands.*
 
 ### TODO
 
-- [ ] Add HTTPS support for production release (or maybe use Nginx as proxy)
+- [x] Add HTTPS support for production release (or maybe use Nginx as proxy)
 
 - [ ] Improve rendering speed by using async statements were possible.
 
