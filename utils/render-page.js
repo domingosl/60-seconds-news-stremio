@@ -49,10 +49,10 @@ class RenderPage {
 
             let frame = 0;
 
-            let nextNotificationAt = 5;
+            let nextNotificationAt = 0;
+            const notificationsStep = 5;
 
             async function processDelay() {
-
 
                 const frameDone = await _self.renderFrame(frame, page, folderName);
 
@@ -85,12 +85,11 @@ class RenderPage {
 
                 }
 
+                const progress = Math.round(100*frameDone/(maxFrames-1));
 
-                const progress = Math.round(100*frameDone/maxFrames);
                 if(progress >= nextNotificationAt) {
-                    logger.info(progress + "%", { tagLabel: _self.tagLabel });
-                    //events.emit('renderProgress', { progress: progress, id: _self.id })
-                    nextNotificationAt += nextNotificationAt;
+                    events.emit('renderProgress', { progress: progress, id: _self.id })
+                    nextNotificationAt += notificationsStep;
                 }
 
                 frame++;
@@ -136,7 +135,7 @@ class RenderPage {
             });
 
             page.on('onCallback', async function (dataHash) {
-                logger.info('Page ready for recording', {tagLabel: _self.tagLabel, hash: dataHash });
+                //logger.debug('Page ready for recording', {tagLabel: _self.tagLabel, hash: dataHash });
 
                 if(lastDataHash === dataHash)
                     return reject('There is no need for video rendering, remote API data did not changed.');
@@ -146,7 +145,7 @@ class RenderPage {
             });
 
             const status = await page.open(url);
-            logger.info('Page opened', {tagLabel: _self.tagLabel});
+            //logger.debug('Page opened', {tagLabel: _self.tagLabel});
 
 
             if (status !== 'success') {

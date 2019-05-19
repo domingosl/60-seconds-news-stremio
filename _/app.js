@@ -1,8 +1,7 @@
 angular.module('app', ['ngAnimate', 'monospaced.qrcode'])
 
     .run(function () {
-        console.log("RUNNING!");
-
+        //console.log("RUNNING!");
     })
 
     .service('timelines', function ($timeout) {
@@ -62,9 +61,11 @@ angular.module('app', ['ngAnimate', 'monospaced.qrcode'])
 
             }, 10050);
 
-            var images = response.data.articles.map(function (el) { return el.urlToImage; }).filter(function (el) { return el }).slice(0,10);
+            $scope.bgImages = response.data.articles.map(function (el) { 
+                return el.urlToImage && el.urlToImage !== 'null' && el.urlToImage !== '' ? el.urlToImage : '/gen-back.jpg'; 
+            }).filter(function (el) { return el }).slice(0,10);
 
-            preloader.preloadImages(images).then(function () {
+            preloader.preloadImages($scope.bgImages).then(function () {
                 console.log("All images preloaded!");
                 notifyPhantom();
             }, function (e) {

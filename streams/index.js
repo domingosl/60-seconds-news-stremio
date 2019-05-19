@@ -28,12 +28,32 @@ class StreamCollection {
         return this.streams;
     }
 
+    findByCountryCode(cc) {
+        return this.streams.find(el => el.countryCode === cc);
+    }
+
+    getPrintableProgress() {
+        let response = "[ ";
+        this.streams.map(el => { 
+            if(!el.active) return; 
+            response += el.countryCode + ": " + el.status.renderingProgress + "% ";
+        });
+        response += "]";
+        return response;
+    }
 
 }
 
 const streamCollection = new StreamCollection(streams);
 
-//events.on('renderProgress', (data) => { console.log(data) });
+events.on('renderProgress', (data) => { 
+    
+    const s = streamCollection.findByCountryCode(data.id);
+    if(s)
+        s.status.renderingProgress = data.progress;
+
+    logger.info(streamCollection.getPrintableProgress());
+});
 
 module.exports.renderAll = () => {
 
