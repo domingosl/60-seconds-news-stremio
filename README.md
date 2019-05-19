@@ -9,6 +9,9 @@
 
 ### Updates
 
+##### Release 19/05/2019 **(IMPORTANT)**
+- Final stability fixes released, *there will be no other updates during the judging phase to prevent new bugs to appear*. Normal developing will continue after June 01 2019.
+
 ##### Release 18/05/2019
 - Small fixes to support production release, mostly HTTPS support.
 
